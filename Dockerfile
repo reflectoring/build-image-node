@@ -39,12 +39,12 @@ RUN curl -sSL https://nodejs.org/dist/${VERSION}/SHASUMS256.txt.asc | gpg --batc
   grep " node-${VERSION}.tar.xz\$" | sha256sum -c | grep .
 
 RUN tar -xf node-${VERSION}.tar.xz
-RUN cd node-${VERSION}
-RUN ./configure --prefix=/usr ${CONFIG_FLAGS}
-RUN make --silent -j$(getconf _NPROCESSORS_ONLN)
-RUN make --silent install
-RUN cd /
-RUN if [ -x /usr/bin/npm ]; then \
+RUN cd node-${VERSION} && \
+    ./configure --prefix=/usr ${CONFIG_FLAGS} && \
+    make --silent -j$(getconf _NPROCESSORS_ONLN) && \
+    make --silent install
+RUN cd / && \
+    if [ -x /usr/bin/npm ]; then \
       npm install -g npm@${NPM_VERSION} \
       find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
     fi
