@@ -3,6 +3,7 @@
 # build-image-node
 
 This is the docker build image used by the reflectoring team for building node based applications.
+The installation routine of nodejs is based on https://github.com/mhart/alpine-node variant.
 
 ## installed packages
 | package        | version     |
@@ -17,7 +18,6 @@ This is the docker build image used by the reflectoring team for building node b
 | g++            | 6.2.1-r1    |
 | libgcc         | 6.2.1-r1    |
 | linux-headers  | 4.4.6-r1    |
-| nvm            | 0.33.1      |
 
 ## license
 
