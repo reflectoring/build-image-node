@@ -45,8 +45,9 @@ RUN make --silent -j$(getconf _NPROCESSORS_ONLN)
 RUN make --silent install
 RUN cd /
 RUN if [ -x /usr/bin/npm ]; then \
-    npm install -g npm@${NPM_VERSION}
-RUN find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; fi
+      npm install -g npm@${NPM_VERSION}
+      find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
+    fi
 RUN apk del curl make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS}
 RUN rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
