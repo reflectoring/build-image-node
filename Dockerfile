@@ -2,9 +2,7 @@ FROM reflectoring/build-image-base:latest
 
 LABEL maintainer "matthias.balke@googlemail.com"
 
-# update apk index cache
-RUN apk update
-RUN apk add \
+RUN apk --no-cache add \
     "ca-certificates=20161130-r1" \
     "openssl=1.0.2k-r0"  \
     "ncurses=6.0-r7" \
@@ -15,9 +13,6 @@ RUN apk add \
     "g++=6.2.1-r1" \
     "libgcc=6.2.1-r1" \
     "linux-headers=4.4.6-r1"
-
-# cleanup apk index cache
-RUN rm -rf /var/cache/apk
 
 # compile nvm from sources
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
