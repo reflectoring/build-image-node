@@ -21,7 +21,7 @@ ENV VERSION=v6.9.5
 ENV NPM_VERSION=3.10.10
 
 # For base builds
-ENV CONFIG_FLAGS="--fully-static --without-npm"
+ENV CONFIG_FLAGS="--fully-static"
 ENV DEL_PKGS="libstdc++"
 ENV RM_DIRS=/usr/include
 
@@ -45,7 +45,7 @@ RUN make --silent -j$(getconf _NPROCESSORS_ONLN)
 RUN make --silent install
 RUN cd /
 RUN if [ -x /usr/bin/npm ]; then \
-      npm install -g npm@${NPM_VERSION}
+      npm install -g npm@${NPM_VERSION} \
       find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
     fi
 RUN apk del curl make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS}
