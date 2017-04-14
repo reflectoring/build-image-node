@@ -14,7 +14,9 @@ RUN apk --no-cache add \
     "libgcc=6.2.1-r1" \
     "linux-headers=4.4.6-r1"
 
-# compile nvm from sources
+RUN touch ~/.bash_profile
+
+# install nvm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
 # RUN nvm install -s ...
